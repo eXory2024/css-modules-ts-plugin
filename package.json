@@ -18,6 +18,7 @@
     "typescript": ">=5.x"
   },
   "devDependencies": {
+    "@types/icss-utils": "^5.1.2",
     "@types/node": "^22.15.29",
     "@types/postcss-modules-extract-imports": "^3.0.5",
     "@types/postcss-modules-local-by-default": "^4.0.2",
