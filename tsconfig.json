@@ -1,0 +1,24 @@
+//
+// This config is based on https://github.com/mrmckeb/typescript-plugin-css-modules/blob/main/tsconfig.json
+//
+{
+	"compilerOptions": {
+		"declaration": true,
+		"esModuleInterop": true,
+		"forceConsistentCasingInFileNames": true,
+		"lib": ["esnext", "dom"],
+		"module": "commonjs",
+		"moduleResolution": "node",
+		"noEmitOnError": true,
+		"noFallthroughCasesInSwitch": true,
+		"resolveJsonModule": true,
+		"outDir": "dist",
+		"rootDir": "src",
+		"skipLibCheck": false,
+		"strict": true,
+		"target": "es5",
+		"types": ["@types/node"]
+	},
+	"include": ["src"],
+	"exclude": ["dist"]
+}
