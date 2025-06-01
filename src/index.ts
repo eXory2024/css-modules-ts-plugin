@@ -28,9 +28,25 @@ const init: tsModule.server.PluginModuleFactory = ({typescript: ts}) => {
 		logger.log(`compiler options: ${JSON.stringify(compilerOptions)}`)
 		logger.log(`options: ${JSON.stringify(pluginOptions)}`)
 
-		//languageServiceHost.getScriptSnapshot = (fileName) => {
-		//	return info.languageServiceHost.getScriptSnapshot(fileName);
-		//}
+		languageServiceHost.readDirectory = (
+			path, extensions, exclude, include, depth
+		) => {
+			return info.languageServiceHost.readDirectory!(
+				path, extensions, exclude, include, depth
+			)
+		}
+
+		languageServiceHost.fileExists = (path) => {
+			return info.languageServiceHost.fileExists(path)
+		}
+
+		languageServiceHost.getScriptSnapshot = (fileName) => {
+			return info.languageServiceHost.getScriptSnapshot(fileName)
+		}
+
+		languageServiceHost.readFile = (path, encoding) => {
+			return info.languageServiceHost.readFile(path, encoding)
+		}
 
 		return languageService
 	}
