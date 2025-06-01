@@ -7,7 +7,11 @@
     "build": "./build.sh"
   },
   "keywords": [],
-  "author": "",
+  "author": "eXory2024 <exory@anio.software>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eXory2024/css-modules-ts-plugin.git"
+  },
   "license": "MIT",
   "description": "",
   "peerDependencies": {
