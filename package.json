@@ -19,6 +19,9 @@
   },
   "devDependencies": {
     "@types/node": "^22.15.29",
+    "@types/postcss-modules-extract-imports": "^3.0.5",
+    "@types/postcss-modules-local-by-default": "^4.0.2",
+    "@types/postcss-modules-scope": "^3.0.4",
     "typescript": "^5.8.3"
   },
   "dependencies": {
