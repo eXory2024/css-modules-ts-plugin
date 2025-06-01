@@ -1,4 +1,4 @@
 #!/bin/bash -eufx
 
 npm run build
-npm publish --provenance
+npm publish --provenance --access public
