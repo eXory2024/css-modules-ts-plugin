@@ -31,7 +31,9 @@ const init: tsModule.server.PluginModuleFactory = ({typescript: ts}) => {
 		//
 		// this portion of the code will only run once per project
 		//
-		if (!projectContextMap.has(projectName)) {
+		const createProjectContext = !projectContextMap.has(projectName)
+
+		if (createProjectContext) {
 			logger.log(`initializing context for project '${projectName}'`)
 
 			projectContextMap.set(projectName, {
