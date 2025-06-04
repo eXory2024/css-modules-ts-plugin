@@ -3,5 +3,5 @@ import type {JobRunner} from "./createJobRunner"
 
 export type ProjectContext = {
 	jobRunner: JobRunner
-	chokidarInstance: FSWatcher
+	chokidarInstance: FSWatcher|undefined
 }
