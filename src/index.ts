@@ -37,6 +37,9 @@ const init: tsModule.server.PluginModuleFactory = ({typescript: ts}) => {
 			logger.log(`initializing context for project '${projectName}'`)
 
 			projectContextMap.set(projectName, {
+				projectRoot: compilerOptions.rootDir!,
+				// projectName should be path to tsconfig.json
+				tsconfigPath: projectName,
 				chokidarInstance: undefined,
 				jobRunner: createJobRunner(logger)
 			})
