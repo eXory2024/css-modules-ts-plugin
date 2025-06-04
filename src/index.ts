@@ -3,24 +3,18 @@ import type {Options} from "./Options.js"
 import {createLogger} from "./createLogger.js"
 
 const init: tsModule.server.PluginModuleFactory = ({typescript: ts}) => {
-	function create(
-		info: tsModule.server.PluginCreateInfo,
-	): tsModule.LanguageService {
-		const languageServiceHost = {} as Partial<tsModule.LanguageServiceHost>
+	function create(info: tsModule.server.PluginCreateInfo) {
+		// Set up decorator object
+		const proxy: tsModule.LanguageService = Object.create(null)
 
-		const languageServiceHostProxy = new Proxy(info.languageServiceHost, {
-			get(target, key: keyof tsModule.LanguageServiceHost) {
-				return languageServiceHost[key] ? languageServiceHost[key] : target[key]
-			}
-		})
+		for (let k of Object.keys(info.languageService) as Array<keyof tsModule.LanguageService>) {
+			const x = info.languageService[k]!
+			// @ts-expect-error - JS runtime trickery which is tricky to type tersely
+			proxy[k] = (...args: Array<{}>) => x.apply(info.languageService, args)
+		}
 
-		const languageService = ts.createLanguageService(languageServiceHostProxy)
-		const logger = createLogger(info)
-		const directory = info.project.getCurrentDirectory()
 		const compilerOptions = info.project.getCompilerOptions()
-
-		// TypeScript plugins have a `cwd` of `/`, which causes issues with import resolution.
-		process.chdir(directory)
+		const logger = createLogger(info)
 
 		// User options for plugin.
 		const pluginOptions: Options = (info.config as {options?: Options}).options ?? {}
@@ -28,7 +22,7 @@ const init: tsModule.server.PluginModuleFactory = ({typescript: ts}) => {
 		logger.log(`compiler options: ${JSON.stringify(compilerOptions)}`)
 		logger.log(`options: ${JSON.stringify(pluginOptions)}`)
 
-		return languageService
+		return proxy
 	}
 
 	return {create}
