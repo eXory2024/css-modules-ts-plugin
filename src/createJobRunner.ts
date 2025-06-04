@@ -29,6 +29,8 @@ export function createJobRunner(
 				return
 			}
 
+			logger.log(`running a job`)
+
 			internal.jobCurrentlyRunning = true
 
 			Promise.resolve().then(() => {
