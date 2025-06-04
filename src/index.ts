@@ -42,7 +42,8 @@ const init: tsModule.server.PluginModuleFactory = ({typescript: ts}) => {
 				// projectName should be path to tsconfig.json
 				tsconfigPath: projectName,
 				chokidarInstance: undefined,
-				jobRunner: createJobRunner(logger)
+				jobRunner: createJobRunner(logger),
+				openedClientFiles: new Map()
 			})
 		}
 
