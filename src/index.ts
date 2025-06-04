@@ -1,6 +1,9 @@
 import type tsModule from "typescript/lib/tsserverlibrary"
 import type {Options} from "./Options.js"
+import type {ProjectContext} from "./ProjectContext.js"
 import {createLogger} from "./createLogger.js"
+
+const projectContextMap: Map<string, ProjectContext> = new Map()
 
 const init: tsModule.server.PluginModuleFactory = ({typescript: ts}) => {
 	function create(info: tsModule.server.PluginCreateInfo) {
