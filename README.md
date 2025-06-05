@@ -11,6 +11,7 @@ This plugin aims to provide a basic LSP support for CSS modules that _should be_
 {
     "compilerOptions": {
         // ... //
+        "rootDir": "./", // <-- make sure this is set!
         "plugins": [{
             "name": "css-modules-ts-plugin"
         }]
