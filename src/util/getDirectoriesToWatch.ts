@@ -21,5 +21,8 @@ export function getDirectoriesToWatch(project: ProjectContext): string[] {
 		path.dirname(project.tsconfigPath)
 	)
 
+	// todo: investigate if compilerOptions.rootDir is
+	// part of wildcardDirectories or not
+
 	return Object.keys(parsedConfig.wildcardDirectories ?? {})
 }
