@@ -1,6 +1,6 @@
 import type tsModule from "typescript/lib/tsserverlibrary"
 
-export type PathInfo = {
+export type VirtualFile = {
 	source: string
 	vSource: tsModule.server.NormalizedPath
 }
