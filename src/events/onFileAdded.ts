@@ -1,5 +1,6 @@
 import type {ProjectContext} from "../ProjectContext.js"
 import type {PathInfo} from "../setupChokidarInstance.js"
+import {generateCSSDeclarationCodeForFile} from "../util/css/generateCSSDeclarationCodeForFile.js"
 
 export function onFileAdded(
 	project: ProjectContext,
@@ -17,7 +18,7 @@ export function onFileAdded(
 		true,
 		// NB: needs to be a module
 		// todo: init with class names from css file
-		`declare const _defaultExport: {};\nexport = _defaultExport;\n`,
+		generateCSSDeclarationCodeForFile(pathInfo.cssSourcePath),
 		ts.ScriptKind.TS,
 		false
 	)
