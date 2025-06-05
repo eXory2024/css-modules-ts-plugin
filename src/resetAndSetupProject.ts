@@ -7,5 +7,9 @@ export async function resetAndSetupProject(
 
 	if (project.state === "initialized") {
 		project.logger.log(`project context needs to be destroyed`)
+
+		if (project.chokidarInstance === undefined) {
+			throw new Error(`project.chokidarInstance must not be undefined here.`)
+		}
 	}
 }
