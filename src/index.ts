@@ -4,6 +4,7 @@ import type {ProjectContext} from "./ProjectContext.js"
 import {createLogger} from "./createLogger.js"
 import {createJobRunner} from "./createJobRunner.js"
 import {sha256Sync} from "./util/sha256Sync.js"
+import {resetAndSetupProject} from "./resetAndSetupProject.js"
 
 function calcProjectId(projectName: string): string {
 	const hash = sha256Sync(projectName)
@@ -67,6 +68,14 @@ const init: tsModule.server.PluginModuleFactory = ({typescript: ts}) => {
 		// overwrite internal object just to be sure they are up to date
 		projectContext.internal.ts = ts
 		projectContext.internal.info = info
+
+		// reset and setup project
+		// NB: this is done in a "jobRunner" because closing a chokidar instance is asynchronous
+		projectContext.jobRunner.runJob(async () => {
+			await resetAndSetupProject(projectContext)
+
+			return undefined
+		})
 
 		return proxy
 	}
