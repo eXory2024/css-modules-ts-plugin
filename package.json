@@ -6,14 +6,19 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "./build.sh"
   },
-  "keywords": [],
+  "keywords": [
+    "css",
+    "modules",
+    "plugin",
+    "typescript"
+  ],
   "author": "eXory2024 <exory@anio.software>",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/eXory2024/css-modules-ts-plugin.git"
   },
   "license": "MIT",
-  "description": "",
+  "description": "Basic CSS modules support for TypeScript.",
   "peerDependencies": {
     "typescript": ">=5.x"
   },
