@@ -5,7 +5,7 @@ export async function resetAndSetupProject(
 ): Promise<undefined> {
 	project.logger.log(`resetAndSetupProject called`)
 
-	if (project.chokidarInstance !== undefined) {
-		project.logger.log(`chokidar instance needs to be destroyed`)
+	if (project.state === "initialized") {
+		project.logger.log(`project context needs to be destroyed`)
 	}
 }
