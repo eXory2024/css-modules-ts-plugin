@@ -11,7 +11,7 @@ export type ProjectContext = {
 		logger: Logger
 	}
 
-	isResetting: boolean
+	_isResetting: boolean
 	projectRoot: string
 	tsconfigPath: string
 	jobRunner: JobRunner
