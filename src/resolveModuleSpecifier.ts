@@ -7,8 +7,7 @@ export function resolveModuleSpecifier(
 	compilerOptions: tsModule.CompilerOptions,
 	logger: Logger,
 	moduleSpecifier: string,
-	containingFile: string,
-	failedLookupLocations: string[]
+	containingFile: string
 ): tsModule.ResolvedModuleWithFailedLookupLocations {
 	// only consider module specifiers that end in .css
 	if (!moduleSpecifier.endsWith(".css")) {

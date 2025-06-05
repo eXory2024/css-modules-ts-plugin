@@ -128,22 +128,12 @@ const init: tsModule.server.PluginModuleFactory = ({typescript: ts}) => {
 				// use our own module resolution if typescript's module resolution failed
 				const moduleSpecifier = moduleLiteral.text
 
-				let failedLookupLocations: string[] = []
-
-				// An array of paths TypeScript searched for the module. All include .ts, .tsx, .d.ts, or .json extensions.
-				// NOTE: TypeScript doesn't expose this in their interfaces, which is why the type is unknown.
-				// https://github.com/microsoft/TypeScript/issues/28770
-				if ("failedLookupLocations" in result) {
-					failedLookupLocations = result.failedLookupLocations as any
-				}
-
 				return resolveModuleSpecifier(
 					ts,
 					compilerOptions,
 					mainLogger,
 					moduleSpecifier,
-					containingFile,
-					failedLookupLocations
+					containingFile
 				)
 			})
 		}
