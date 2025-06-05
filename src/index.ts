@@ -88,10 +88,16 @@ const init: tsModule.server.PluginModuleFactory = ({typescript: ts}) => {
 		info.languageServiceHost.resolveModuleNameLiterals = (
 			moduleLiterals,
 			containingFile,
+			redirectedReference,
+			compilerOptions,
 			...rest
 		) => {
 			const resolvedModules = resolveModuleNameLiterals(
-				moduleLiterals, containingFile, ...rest
+				moduleLiterals,
+				containingFile,
+				redirectedReference,
+				compilerOptions,
+				...rest
 			)
 
 			return moduleLiterals.map((moduleLiteral, index) => {
