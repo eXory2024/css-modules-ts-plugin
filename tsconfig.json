@@ -1,5 +1,5 @@
 //
-// This config is based on https://github.com/mrmckeb/typescript-plugin-css-modules/blob/main/tsconfig.json
+// This config is partially based on https://github.com/mrmckeb/typescript-plugin-css-modules/blob/main/tsconfig.json
 //
 {
     "compilerOptions": {
