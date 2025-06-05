@@ -17,6 +17,15 @@ export async function resetAndSetupProject(
 		project.logger.log(`closing chokidar instance`)
 		await project.chokidarInstance.close()
 
+		project.logger.log(`closing virtual files`)
+		for (const [_, vFile] of project.virtualFiles.entries()) {
+			project.logger.log(`closing '${vFile.normalizedTSServerPath}'`)
+
+			project.internal.info.project.projectService.closeClientFile(
+				vFile.tsScriptInfo.fileName
+			)
+		}
+
 		project.chokidarInstance = undefined
 		project.state = "initial"
 	}
