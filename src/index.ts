@@ -77,6 +77,33 @@ const init: tsModule.server.PluginModuleFactory = ({typescript: ts}) => {
 			return undefined
 		})
 
+		/*
+		const originalFileExists = info.languageServiceHost.fileExists.bind(
+			info.languageServiceHost
+		)
+
+		// tell language server that the virtual files exists
+		info.languageServiceHost.fileExists = (path) => {
+			// this doesn't work currently:
+			// don't know how to make typescript re-trigger fileExists
+
+			// // project not yet initialized, return default
+			// if (projectContext.state !== "initialized") {
+			// 	mainLogger.log(`fileExists ${path} project not initialized (yet)`)
+			//
+			// 	return originalFileExists(path)
+			// }
+			//
+			// const result = originalFileExists(path) || projectContext.virtualFiles.has(path)
+			//
+			// mainLogger.log(`fileExists ${path}: ${result}`)
+			//
+			// return result
+
+			return originalFileExists(path)// || path.endsWith(".d.css.ts")
+		}
+		*/
+
 		return proxy
 	}
 
