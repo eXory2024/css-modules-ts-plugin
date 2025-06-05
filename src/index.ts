@@ -5,6 +5,7 @@ import {createLogger} from "./createLogger.js"
 import {createJobRunner} from "./createJobRunner.js"
 import {sha256Sync} from "./util/sha256Sync.js"
 import {resetAndSetupProject} from "./resetAndSetupProject.js"
+import {resolveModuleSpecifier} from "./resolveModuleSpecifier.js"
 
 function calcProjectId(projectName: string): string {
 	const hash = sha256Sync(projectName)
@@ -76,6 +77,51 @@ const init: tsModule.server.PluginModuleFactory = ({typescript: ts}) => {
 
 			return undefined
 		})
+
+		//
+		// hook into typescript's module resolution and map .css imports to .d.css.ts
+		//
+		const resolveModuleNameLiterals = info.languageServiceHost.resolveModuleNameLiterals!.bind(
+			info.languageServiceHost
+		)
+
+		info.languageServiceHost.resolveModuleNameLiterals = (
+			moduleLiterals,
+			containingFile,
+			...rest
+		) => {
+			const resolvedModules = resolveModuleNameLiterals(
+				moduleLiterals, containingFile, ...rest
+			)
+
+			return moduleLiterals.map((moduleLiteral, index) => {
+				const result = resolvedModules[index]
+
+				if (result.resolvedModule) {
+					return result
+				}
+
+				// use our own module resolution if typescript's module resolution failed
+				const moduleSpecifier = moduleLiteral.text
+
+				let failedLookupLocations: string[] = []
+
+				// An array of paths TypeScript searched for the module. All include .ts, .tsx, .d.ts, or .json extensions.
+				// NOTE: TypeScript doesn't expose this in their interfaces, which is why the type is unknown.
+				// https://github.com/microsoft/TypeScript/issues/28770
+				if ("failedLookupLocations" in result) {
+					failedLookupLocations = result.failedLookupLocations as any
+				}
+
+				return resolveModuleSpecifier(
+					ts,
+					mainLogger,
+					moduleSpecifier,
+					containingFile,
+					failedLookupLocations
+				)
+			})
+		}
 
 		/*
 		const originalFileExists = info.languageServiceHost.fileExists.bind(
