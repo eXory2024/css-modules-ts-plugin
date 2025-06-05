@@ -4,6 +4,7 @@ import path from "node:path"
 
 export function resolveModuleSpecifier(
 	ts: typeof tsModule,
+	compilerOptions: tsModule.CompilerOptions,
 	logger: Logger,
 	moduleSpecifier: string,
 	containingFile: string,

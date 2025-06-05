@@ -122,6 +122,7 @@ const init: tsModule.server.PluginModuleFactory = ({typescript: ts}) => {
 
 				return resolveModuleSpecifier(
 					ts,
+					compilerOptions,
 					mainLogger,
 					moduleSpecifier,
 					containingFile,
