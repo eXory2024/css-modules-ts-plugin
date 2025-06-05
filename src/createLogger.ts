@@ -7,10 +7,11 @@ export type Logger = {
 
 export const createLogger = (
 	info: tsModule.server.PluginCreateInfo,
+	label: string = ""
 ): Logger => {
 	const log = (message: string) => {
 		info.project.projectService.logger.info(
-			`[css-modules-ts-plugin] ${message}`
+			`[css-modules-ts-plugin${label}] ${message}`
 		)
 	}
 
