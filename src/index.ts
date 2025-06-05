@@ -44,7 +44,10 @@ const init: tsModule.server.PluginModuleFactory = ({typescript: ts}) => {
 			const projectId = calcProjectId(projectName)
 			const projectLogger = createLogger(info, ` project: ${projectId}`)
 
-			mainLogger.log(`initializing context for project '${projectName}' (has id ${projectId})`)
+			mainLogger.log(
+				`initializing context for project '${projectName}' (has id ${projectId})` +
+				` for the very first time.`
+			)
 
 			projectContextMap.set(projectName, {
 				projectId,
