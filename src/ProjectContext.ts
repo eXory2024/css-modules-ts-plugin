@@ -5,6 +5,8 @@ import type {JobRunner} from "./createJobRunner"
 import type {VirtualFile} from "./VirtualFile.js"
 
 export type ProjectContext = {
+	state: "initial" | "resetting" | "initialized"
+
 	projectId: string
 	logger: Logger
 
@@ -13,7 +15,6 @@ export type ProjectContext = {
 		info: tsModule.server.PluginCreateInfo
 	}
 
-	_isResetting: boolean
 	projectRoot: string
 	tsconfigPath: string
 	jobRunner: JobRunner
