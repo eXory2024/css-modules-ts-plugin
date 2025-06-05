@@ -18,13 +18,13 @@ const init: tsModule.server.PluginModuleFactory = ({typescript: ts}) => {
 		}
 
 		const compilerOptions = info.project.getCompilerOptions()
-		const logger = createLogger(info)
+		const mainLogger = createLogger(info)
 
 		// User options for plugin.
 		const pluginOptions: Options = (info.config as {options?: Options}).options ?? {}
 
-		logger.log(`compiler options: ${JSON.stringify(compilerOptions)}`)
-		logger.log(`options: ${JSON.stringify(pluginOptions)}`)
+		mainLogger.log(`compiler options: ${JSON.stringify(compilerOptions)}`)
+		mainLogger.log(`options: ${JSON.stringify(pluginOptions)}`)
 
 		const projectName = info.project.getProjectName()
 
@@ -34,16 +34,16 @@ const init: tsModule.server.PluginModuleFactory = ({typescript: ts}) => {
 		const createProjectContext = !projectContextMap.has(projectName)
 
 		if (createProjectContext) {
-			logger.log(`initializing context for project '${projectName}'`)
+			mainLogger.log(`initializing context for project '${projectName}'`)
 
 			projectContextMap.set(projectName, {
-				internal: {ts, info, logger},
+				internal: {ts, info, logger: mainLogger},
 				_isResetting: false,
 				projectRoot: compilerOptions.rootDir!,
 				// projectName should be path to tsconfig.json
 				tsconfigPath: projectName,
 				chokidarInstance: undefined,
-				jobRunner: createJobRunner(logger),
+				jobRunner: createJobRunner(mainLogger),
 				virtualFiles: new Map()
 			})
 		}
@@ -51,7 +51,7 @@ const init: tsModule.server.PluginModuleFactory = ({typescript: ts}) => {
 		const projectContext = projectContextMap.get(projectName)!
 
 		// overwrite internal object just to be sure they are up to date
-		projectContext.internal = {ts, info, logger}
+		projectContext.internal = {ts, info, logger: mainLogger}
 
 		return proxy
 	}
