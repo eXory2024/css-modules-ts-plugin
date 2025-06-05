@@ -5,7 +5,7 @@ This plugin aims to provide a basic LSP support for CSS modules that _should be_
 1. `npm install --save-dev css-modules-ts-plugin`
 2. Add this to your tsconfig.json:
 
-```json
+```jsonc
 {
     "compilerOptions": {
         // ... //
