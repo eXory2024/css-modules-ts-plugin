@@ -97,6 +97,7 @@ const init: tsModule.server.PluginModuleFactory = ({typescript: ts}) => {
 			return moduleLiterals.map((moduleLiteral, index) => {
 				const result = resolvedModules[index]
 
+				// if typescript was able to resolve the import use that
 				if (result.resolvedModule) {
 					return result
 				}
