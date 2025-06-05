@@ -10,9 +10,7 @@ export function getDirectoriesToWatch(project: ProjectContext): string[] {
 	)
 
 	if (config.error) {
-		project.logger.error(
-			new Error(`Unable to read tsconfig.json file`)
-		)
+		project.logger.error(new Error(`Unable to read tsconfig.json file`))
 
 		return []
 	}
