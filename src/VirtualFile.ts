@@ -1,6 +1,8 @@
 import type tsModule from "typescript/lib/tsserverlibrary"
 
 export type VirtualFile = {
+	tsScriptInfo: tsModule.server.ScriptInfo
+
 	//
 	// path of the virtual .d.css.ts file
 	//
