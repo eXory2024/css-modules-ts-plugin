@@ -1,4 +1,7 @@
 import type {ProjectContext} from "./ProjectContext.js"
+import {getDirectoriesToWatch} from "./util/getDirectoriesToWatch.js"
+import chokidar from "chokidar"
+import {setupChokidarInstance} from "./setupChokidarInstance.js"
 
 export async function resetAndSetupProject(
 	project: ProjectContext
@@ -29,5 +32,24 @@ export async function resetAndSetupProject(
 		project.virtualFiles = new Map()
 		project.chokidarInstance = undefined
 		project.state = "initial"
+	}
+
+	if (project.state === "initial") {
+		project.logger.log(`initializing project`)
+
+		// todo: assert chokidarInstance=undefined, virtualFiles size = 0
+
+		const dirsToWatch = getDirectoriesToWatch(project)
+
+		for (const dir of dirsToWatch) {
+			project.logger.log(`will be watching directory '${dir}'`)
+		}
+
+		const chokidarInstance = chokidar.watch(dirsToWatch)
+
+		setupChokidarInstance(project, chokidarInstance)
+
+		project.chokidarInstance = chokidarInstance
+		project.state = "initialized"
 	}
 }
