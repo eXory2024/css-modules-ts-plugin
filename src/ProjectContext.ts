@@ -10,6 +10,7 @@ export type ProjectContext = {
 	projectId: string
 	logger: Logger
 
+	// here so we don't have to always pass this around ...
 	internal: {
 		ts: typeof tsModule
 		info: tsModule.server.PluginCreateInfo
