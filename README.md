@@ -10,8 +10,9 @@ This plugin aims to provide a basic LSP support for CSS modules that _should be_
 ```jsonc
 {
     "compilerOptions": {
-        // ... //
-        "rootDir": "./", // <-- make sure this is set!
+        // ... other compiler options ...
+
+        "rootDir": "./", // make sure rootDir is set!
         "plugins": [{
             "name": "css-modules-ts-plugin"
         }]
