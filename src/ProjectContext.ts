@@ -17,6 +17,7 @@ export type ProjectContext = {
 	}
 
 	projectRoot: string
+	projectPackageJSONIndicatesESM: boolean
 	tsconfigPath: string
 	jobRunner: JobRunner
 	chokidarInstance: FSWatcher|undefined

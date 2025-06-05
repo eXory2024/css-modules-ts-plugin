@@ -6,6 +6,8 @@ import {createJobRunner} from "./createJobRunner.js"
 import {sha256Sync} from "./util/sha256Sync.js"
 import {resetAndSetupProject} from "./resetAndSetupProject.js"
 import {resolveModuleSpecifier} from "./resolveModuleSpecifier.js"
+import fs from "node:fs"
+import path from "node:path"
 
 function calcProjectId(projectName: string): string {
 	const hash = sha256Sync(projectName)
@@ -51,12 +53,27 @@ const init: tsModule.server.PluginModuleFactory = ({typescript: ts}) => {
 				` for the very first time.`
 			)
 
+			let projectPackageJSONIndicatesESM = false
+
+			const projectPackageJSON = JSON.parse(
+				fs.readFileSync(
+					path.join(compilerOptions.rootDir!, "package.json")
+				).toString()
+			)
+
+			if ("type" in projectPackageJSON) {
+				projectPackageJSONIndicatesESM = projectPackageJSON.type === "module"
+			}
+
+			mainLogger.log(`project's package.json indicates ESM? ${projectPackageJSONIndicatesESM}`)
+
 			projectContextMap.set(projectName, {
 				state: "initial",
 				projectId,
 				logger: projectLogger,
 				internal: {ts, info},
 				projectRoot: compilerOptions.rootDir!,
+				projectPackageJSONIndicatesESM,
 				// projectName should be path to tsconfig.json
 				tsconfigPath: projectName,
 				chokidarInstance: undefined,
