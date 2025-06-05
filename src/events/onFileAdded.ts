@@ -35,4 +35,10 @@ export function onFileAdded(
 		normalizedTSServerPath: pathInfo.normalizedTSServerPath,
 		tsScriptInfo
 	})
+
+	tsScriptInfo.attachToProject(info.project)
+	tsScriptInfo.markContainingProjectsAsDirty()
+
+//	info.project.updateGraph()
+	info.project.refreshDiagnostics()
 }
