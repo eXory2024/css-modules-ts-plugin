@@ -52,7 +52,8 @@ const init: tsModule.server.PluginModuleFactory = ({typescript: ts}) => {
 
 			projectContextMap.set(projectName, {
 				projectId,
-				internal: {ts, info, logger: projectLogger},
+				logger: projectLogger,
+				internal: {ts, info},
 				_isResetting: false,
 				projectRoot: compilerOptions.rootDir!,
 				// projectName should be path to tsconfig.json

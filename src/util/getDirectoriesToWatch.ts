@@ -2,7 +2,7 @@ import type {ProjectContext} from "../ProjectContext.js"
 import path from "node:path"
 
 export function getDirectoriesToWatch(project: ProjectContext): string[] {
-	const {ts, logger} = project.internal
+	const {ts} = project.internal
 
 	const config = ts.readConfigFile(
 		project.tsconfigPath,
@@ -10,7 +10,7 @@ export function getDirectoriesToWatch(project: ProjectContext): string[] {
 	)
 
 	if (config.error) {
-		logger.error(
+		project.logger.error(
 			new Error(`Unable to read tsconfig.json file`)
 		)
 

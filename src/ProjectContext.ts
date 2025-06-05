@@ -6,11 +6,11 @@ import type {VirtualFile} from "./VirtualFile.js"
 
 export type ProjectContext = {
 	projectId: string
+	logger: Logger
 
 	internal: {
 		ts: typeof tsModule
 		info: tsModule.server.PluginCreateInfo
-		logger: Logger
 	}
 
 	_isResetting: boolean
