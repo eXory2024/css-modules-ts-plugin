@@ -24,9 +24,14 @@ export async function resetAndSetupProject(
 		for (const [_, vFile] of project.virtualFiles.entries()) {
 			project.logger.log(`closing '${vFile.normalizedTSServerPath}'`)
 
-			project.internal.info.project.projectService.closeClientFile(
-				vFile.tsScriptInfo.fileName
-			)
+			//project.internal.info.project.projectService.closeClientFile(
+			//	vFile.tsScriptInfo.fileName
+			//)
+
+			// not sure what the correct order is here ...
+			// or if .closeClientFile() would be enough
+			vFile.tsScriptInfo.detachAllProjects()
+			vFile.tsScriptInfo.close()
 		}
 
 		project.virtualFiles = new Map()
