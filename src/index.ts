@@ -3,6 +3,13 @@ import type {Options} from "./Options.js"
 import type {ProjectContext} from "./ProjectContext.js"
 import {createLogger} from "./createLogger.js"
 import {createJobRunner} from "./createJobRunner.js"
+import {sha256Sync} from "./util/sha256Sync.js"
+
+function calcProjectId(projectName: string): string {
+	const hash = sha256Sync(projectName)
+
+	return hash.slice(0, 4) + hash.slice(-4)
+}
 
 const projectContextMap: Map<string, ProjectContext> = new Map()
 
@@ -34,11 +41,13 @@ const init: tsModule.server.PluginModuleFactory = ({typescript: ts}) => {
 		const createProjectContext = !projectContextMap.has(projectName)
 
 		if (createProjectContext) {
-			mainLogger.log(`initializing context for project '${projectName}'`)
+			const projectId = calcProjectId(projectName)
+			const projectLogger = createLogger(info, ` project: ${projectId}`)
 
-			const projectLogger = createLogger(info)
+			mainLogger.log(`initializing context for project '${projectName}' (has id ${projectId})`)
 
 			projectContextMap.set(projectName, {
+				projectId,
 				internal: {ts, info, logger: projectLogger},
 				_isResetting: false,
 				projectRoot: compilerOptions.rootDir!,

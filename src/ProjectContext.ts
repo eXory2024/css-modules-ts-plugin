@@ -5,6 +5,8 @@ import type {JobRunner} from "./createJobRunner"
 import type {VirtualFile} from "./VirtualFile.js"
 
 export type ProjectContext = {
+	projectId: string
+
 	internal: {
 		ts: typeof tsModule
 		info: tsModule.server.PluginCreateInfo
