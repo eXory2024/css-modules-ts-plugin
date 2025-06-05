@@ -16,5 +16,5 @@ export type ProjectContext = {
 	tsconfigPath: string
 	jobRunner: JobRunner
 	chokidarInstance: FSWatcher|undefined
-	openedClientFiles: Map<string, VirtualFile>
+	virtualFiles: Map<string, VirtualFile>
 }

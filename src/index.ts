@@ -44,7 +44,7 @@ const init: tsModule.server.PluginModuleFactory = ({typescript: ts}) => {
 				tsconfigPath: projectName,
 				chokidarInstance: undefined,
 				jobRunner: createJobRunner(logger),
-				openedClientFiles: new Map()
+				virtualFiles: new Map()
 			})
 		}
 
