@@ -17,7 +17,6 @@ export function onFileAdded(
 		pathInfo.normalizedTSServerPath,
 		true,
 		// NB: needs to be a module
-		// todo: init with class names from css file
 		generateCSSDeclarationCodeForFile(pathInfo.cssSourcePath),
 		ts.ScriptKind.TS,
 		false
