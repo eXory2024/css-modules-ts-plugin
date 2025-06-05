@@ -67,8 +67,7 @@ const init: tsModule.server.PluginModuleFactory = ({typescript: ts}) => {
 		const projectContext = projectContextMap.get(projectName)!
 
 		// overwrite internal object just to be sure they are up to date
-		projectContext.internal.ts = ts
-		projectContext.internal.info = info
+		projectContext.internal = {ts, info}
 
 		// reset and setup project
 		// NB: this is done in a "jobRunner" because closing a chokidar instance is asynchronous
