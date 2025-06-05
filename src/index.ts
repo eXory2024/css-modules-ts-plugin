@@ -51,7 +51,8 @@ const init: tsModule.server.PluginModuleFactory = ({typescript: ts}) => {
 		const projectContext = projectContextMap.get(projectName)!
 
 		// overwrite internal object just to be sure they are up to date
-		projectContext.internal = {ts, info, logger: mainLogger}
+		projectContext.internal.ts = ts
+		projectContext.internal.info = info
 
 		return proxy
 	}
