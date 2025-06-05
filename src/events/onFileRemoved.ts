@@ -20,5 +20,7 @@ export function onFileRemoved(
 		vFile.tsScriptInfo.detachAllProjects()
 
 		project.virtualFiles.delete(pathInfo.normalizedTSServerPath)
+
+		project.internal.info.project.refreshDiagnostics()
 	}
 }
