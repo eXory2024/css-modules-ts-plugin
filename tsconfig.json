@@ -10,8 +10,6 @@
         "module": "commonjs",
         "moduleResolution": "node",
         "noEmitOnError": true,
-        "noFallthroughCasesInSwitch": true,
-        "resolveJsonModule": true,
         "outDir": "dist",
         "rootDir": "src",
         "skipLibCheck": false,
