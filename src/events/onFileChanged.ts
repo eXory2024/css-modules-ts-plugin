@@ -5,5 +5,5 @@ export function onFileChanged(
 	project: ProjectContext,
 	pathInfo: PathInfo
 ) {
-	
+	project.logger.log(`chokidar:changed ${pathInfo.cssSourcePath}`)
 }

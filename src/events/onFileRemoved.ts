@@ -5,5 +5,5 @@ export function onFileRemoved(
 	project: ProjectContext,
 	pathInfo: PathInfo
 ) {
-	
+	project.logger.log(`chokidar:removed ${pathInfo.cssSourcePath}`)
 }
