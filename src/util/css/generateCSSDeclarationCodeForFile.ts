@@ -2,7 +2,8 @@ import {getCSSExports} from "./getCSSExports.js"
 import fs from "node:fs"
 
 export function generateCSSDeclarationCodeForFile(
-	srcFilePath: string
+	srcFilePath: string,
+	useESM: boolean
 ): string {
 	const cssExports = getCSSExports(
 		fs.readFileSync(srcFilePath).toString(),
@@ -18,7 +19,12 @@ export function generateCSSDeclarationCodeForFile(
 	}
 
 	code += `}\n`
-	code += `export = _defaultExport\n`
+
+	if (useESM) {
+		code += `export default _defaultExport\n`
+	} else {
+		code += `export = _defaultExport\n`
+	}
 
 	return code
 }

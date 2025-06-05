@@ -17,7 +17,10 @@ export function onFileAdded(
 		pathInfo.normalizedTSServerPath,
 		true,
 		// NB: needs to be a module
-		generateCSSDeclarationCodeForFile(pathInfo.cssSourcePath),
+		generateCSSDeclarationCodeForFile(
+			pathInfo.cssSourcePath,
+			project.projectPackageJSONIndicatesESM
+		),
 		ts.ScriptKind.TS,
 		false
 	)

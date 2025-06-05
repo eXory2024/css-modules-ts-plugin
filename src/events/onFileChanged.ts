@@ -16,7 +16,10 @@ export function onFileChanged(
 		vFile.tsScriptInfo.editContent(
 			0,
 			vFile.tsScriptInfo.getSnapshot().getLength(),
-			generateCSSDeclarationCodeForFile(pathInfo.cssSourcePath)
+			generateCSSDeclarationCodeForFile(
+				pathInfo.cssSourcePath,
+				project.projectPackageJSONIndicatesESM
+			)
 		)
 
 		vFile.tsScriptInfo.markContainingProjectsAsDirty()
