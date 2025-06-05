@@ -26,6 +26,7 @@ export async function resetAndSetupProject(
 			)
 		}
 
+		project.virtualFiles = new Map()
 		project.chokidarInstance = undefined
 		project.state = "initial"
 	}
