@@ -11,5 +11,11 @@ export async function resetAndSetupProject(
 		if (project.chokidarInstance === undefined) {
 			throw new Error(`project.chokidarInstance must not be undefined here.`)
 		}
+
+		project.logger.log(`closing chokidar instance`)
+		await project.chokidarInstance.close()
+
+		project.chokidarInstance = undefined
+		project.state = "initial"
 	}
 }
