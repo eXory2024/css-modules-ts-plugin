@@ -2,6 +2,7 @@ import type tsModule from "typescript/lib/tsserverlibrary"
 import type {Logger} from "./createLogger.js"
 import type {FSWatcher} from "chokidar"
 import type {JobRunner} from "./createJobRunner"
+import type {VirtualFile} from "./VirtualFile.js"
 
 export type ProjectContext = {
 	internal: {
@@ -15,5 +16,5 @@ export type ProjectContext = {
 	tsconfigPath: string
 	jobRunner: JobRunner
 	chokidarInstance: FSWatcher|undefined
-	openedClientFiles: Map<string, undefined>
+	openedClientFiles: Map<string, VirtualFile>
 }
