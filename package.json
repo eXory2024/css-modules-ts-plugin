@@ -34,7 +34,7 @@
     "postcss-modules-scope": "^3.2.1"
   },
   "files": [
-     "./dist/index.js",
+     "./dist/",
      "./package.json"
   ]
 }
